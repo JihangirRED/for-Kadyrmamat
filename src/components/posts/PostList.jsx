@@ -11,13 +11,14 @@ const PostList = () => {
   // useEffect(() => {
   //   getPost();
   // }, []);
-  //! SEARCH
 
+  //! SEARCH
   const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
     setPage(1);
     getPost();
   }, [searchParams]);
+
   // !PAGINATION
 
   const itemPerPage = 8;

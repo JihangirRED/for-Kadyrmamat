@@ -18,14 +18,16 @@ import SearchIcon from "@mui/icons-material/Search";
 import { AccountCircle } from "@mui/icons-material";
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthContext";
+
 import { usePosts } from "../context/PostContext";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useCart } from "../context/CartContext";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-  const { user, LogOut } = useAuth;
+  // const { user, logOut } = useAuth;
+  const { user, logOut } = useAuth();
   const { likesCount } = usePosts();
   const { addPostToCard, getProductsCountInCart } = useCart();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -49,13 +51,12 @@ const Navbar = () => {
 
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleLogOut = () => {
-    LogOut();
-    handleClose(); // Закрываем меню после выхода
-  };
-
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const handleLogOut = () => {
+    logOut();
+    handleClose(); // Закрываем меню после выхода
   };
 
   const handleMenu = (event) => {
@@ -202,6 +203,7 @@ const Navbar = () => {
                 <Link to="/login">
                   <MenuItem onClick={handleMenuItemClick}>Sign In</MenuItem>
                 </Link>
+                <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
               </>
             )}
           </Menu>
